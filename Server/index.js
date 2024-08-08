@@ -1,20 +1,22 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const express = require('express')
+const cors = require('cors')
+require('dotenv').config({ path: "./.env" })
+const connectDB = require('./config/connectDb.js')
+
 const app = express();
-dotenv.config();
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true
+}))
 
-const mongoURI = process.env.MONGODB;
+app.use(express.json())
+const PORT = process.env.PORT || 8080
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  console.log('Database Connected!!');
-}).catch((err) => {
-  console.log('Database connection error:', err);
-});
-
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log("Server running at " + PORT)
+    })
+}).catch(error => {
+    console.error("Database connection failed:", error)
+})
