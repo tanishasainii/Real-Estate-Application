@@ -2,8 +2,9 @@ const express = require('express')
 const cors = require('cors')
 require('dotenv').config({ path: "./.env" })
 const connectDB = require('./config/connectDb.js')
-import userRouter from './routes/user.route.js'
-import authRouter from './routes/auth.route.js'
+const userRouter = require('./routes/user.route.js');
+const authRouter = require('./routes/auth.route.js');
+
 const app = express();
 dotenv.config();
 
