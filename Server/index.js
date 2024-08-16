@@ -1,12 +1,14 @@
 const express = require('express')
 const cors = require('cors')
-require('dotenv').config({ path: "./.env" })
+const dotenv= require('dotenv').config({ path: "./.env" })
 const connectDB = require('./config/connectDb.js')
 const userRouter = require('./routes/user.route.js');
 const authRouter = require('./routes/auth.route.js');
+dotenv.config();
 
 const app = express();
-dotenv.config();
+app.use(express.json());
+
 
 const mongoURI = process.env.MONGODB;
 
