@@ -4,10 +4,12 @@ const dotenv= require('dotenv').config({ path: "./.env" })
 const connectDB = require('./config/connectDb.js')
 const userRouter = require('./routes/user.route.js');
 const authRouter = require('./routes/auth.route.js');
+const cookieParser = require('cookie-parser');
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 
 const mongoURI = process.env.MONGODB;
