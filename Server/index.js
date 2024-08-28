@@ -5,6 +5,7 @@ const connectDB = require('./config/connectDb.js')
 const userRouter = require('./routes/user.route.js');
 const authRouter = require('./routes/auth.route.js');
 const cookieParser = require('cookie-parser');
+const listingRouter = require('./routes/listing.route.js');
 dotenv.config();
 
 const app = express();
@@ -26,7 +27,7 @@ mongoose.connect(mongoURI, {
 
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
-
+app.use('/api/listing', listingRouter);
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
